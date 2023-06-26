@@ -3,9 +3,11 @@ import  userModel  from '../Models/usermodel.js';
 export const updateUser = async(req,res)=>{
     try {
         const userId=req.params.id;
-        const body=req.body;
-        const user=await userModel.findById(userId);
-        
+        let body=req.body;
+        if(req.file){
+            const filename=req.file.originalname.replace(/\s/g, "");
+            body={...req.body,userProfileImg:filename};
+        }
         await userModel.findByIdAndUpdate(userId,body);
         const updateduser = await userModel.findById(userId);
         res.status(200).json(updateduser);

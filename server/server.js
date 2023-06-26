@@ -6,9 +6,12 @@ import bodyParser from "body-parser";
 import multer from 'multer';
 import authrouter from './Routers/authrouter.js'
 import userRouter from "./Routers/userRouter.js";
-import { createUser } from "./Controllers/authController.js";
 import path from "path";
 import { fileURLToPath } from "url";
+import { createPost } from "./Controllers/postController.js";
+import { updateUser } from "./Controllers/userController.js";
+import { createUser } from "./Controllers/authController.js";
+import postRouter from "./Routers/postRouter.js";
 
 dotenv.config()
 const PORT=process.env.PORT || 5001
@@ -21,8 +24,9 @@ app.use(cors());
 
 app.use('/auth',authrouter);
 app.use('/users',userRouter);
+app.use('/posts',postRouter);
 app.use('/assets',express.static(path.join(__dirname,"public/assets")));
-console.log(path.join(__dirname,"public/assets"))
+
 mongoose
   .connect(process.env.MONGO_DB)
   .then(() => {
@@ -43,7 +47,9 @@ const multerStorage = multer.diskStorage({
 
 const upload=multer({storage:multerStorage});
 
-app.post('/auth/register',upload.single('Image'),createUser);
+app.post('/auth/register',upload.single('Image'), createUser);
+app.put('/users/:id',upload.single('Image'),updateUser);
+app.post('/posts',upload.single('Image'),createPost);
 
 app.get('/',(req,res)=>{
     res.send("hey")
