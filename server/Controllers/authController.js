@@ -28,8 +28,15 @@ export const findUser=async(req,res)=>{
 }
 export const createUser = async(req,res)=>{
     try{
-        const user = await userModel.create(req.body);
-        res.status(200).json(user);
+        const filename=req.file.originalname.replace(/\s/g, "");
+        const body={
+            userUserName:req.body.userUserName,
+            userName:req.body.userName,
+            userPassword:req.body.userPassword,
+            userDOB:req.body.userDOB,
+            userProfileImg:filename
+        };
+        res.status(200).json(body);
     }catch(err){
         res.status(400).json({error:err.message})
     }
