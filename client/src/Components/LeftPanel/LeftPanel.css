@@ -3,15 +3,16 @@
     padding: 0px;
     font-family: 'Poppins';
 }
-.left_panel_logo{
-    height: 40px;
-}
 .left_panel_container{
+    position: fixed;
+    background-color: white;
     border-right: solid rgb(250, 250, 250) 1px;
 
 }
+.left_panel_logo{
+    height: 40px;
+}
 .left_panel_profile{
-    height: 100vh;
     width: 250px;
 }
 .left_panel_profile_header{

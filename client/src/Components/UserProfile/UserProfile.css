@@ -1,0 +1,11 @@
+.userProfile_container{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+.userProfile_image{
+    height: 35px;
+    width: 35px;
+    object-fit: cover;
+    border-radius: 50%;
+}

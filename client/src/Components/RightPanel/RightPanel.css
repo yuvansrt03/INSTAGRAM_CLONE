@@ -1,0 +1,25 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Poppins';
+}
+.right_panel_container{
+    padding:0px 10px;
+    position: fixed;
+    right: 0px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    width: 230px;
+    margin-left: 12px;
+}
+.right_panel_user_profile{
+    margin-top: 20px;
+}
+.right_panel_friends>*{
+    margin-top: 5px;
+}
+.right_panel_friends{
+    margin-top: 10px;
+    padding-bottom: 15px;
+}

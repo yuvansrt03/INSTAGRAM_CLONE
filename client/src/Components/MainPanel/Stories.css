@@ -1,0 +1,7 @@
+.main_panel_story_part{
+    height: 70px;
+    width: 70px;
+    object-fit: cover;
+    border-radius: 100%;
+    margin-top: 25px;
+}

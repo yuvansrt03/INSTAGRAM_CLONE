@@ -1,6 +1,8 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus,faSearch } from '@fortawesome/free-solid-svg-icons'
+import Feeds from './Feeds'
+import Stories from './Stories'
 import './MainPanel.css'
 function MainPanel() {
   return (
@@ -17,17 +19,27 @@ function MainPanel() {
         </button>
       </div>
 
-      <div className="main_panel_main_section">
-        <h2 className='float-left text-2xl font-bold '>Stories</h2>
-        <div className="main_panel_stories_section">
-          <img class="main_panel_story_part" src="https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"></img>
-          <img class="main_panel_story_part" src="https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"></img>
-          <img class="main_panel_story_part" src="https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"></img>
-          <img class="main_panel_story_part" src="https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"></img>
-          <img class="main_panel_story_part" src="https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"></img>
-          <img class="main_panel_story_part" src="https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"></img>
-          <img class="main_panel_story_part" src="https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"></img>
+      <div className="main_panel_main_section_background">
+        <div className="main_panel_main_section_container">
+          <div className="main_panel_stories_section">
+            <Stories/>
+            <Stories/>
+            <Stories/>
+            <Stories/>
+            <Stories/>
+            <Stories/>
+            <Stories/>
+          </div>
+          <div className="main_panel_feeds_section">
+            <Feeds/>
+            {/* <Feeds/>
+            <Feeds/>
+            <Feeds/> */}
+            {/* <Feeds/>
+            <Feeds/> */}
+          </div>
         </div>
+        
       </div>
     </div>
   )
