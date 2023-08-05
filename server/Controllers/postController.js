@@ -57,7 +57,6 @@ export const createPost = async(req,res)=>{
             postAuthorName : req.body.postAuthorName,
             postAuthorProfilePic : req.body.postAuthorProfilePic,
             postDescription : req.body.postDescription,
-            postLikes : {},
         })
         res.status(200).json(post);
     } catch (error) {

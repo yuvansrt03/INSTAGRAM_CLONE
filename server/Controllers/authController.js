@@ -28,7 +28,13 @@ export const findUser=async(req,res)=>{
 }
 export const createUser = async(req,res)=>{
     try{
-        const filename=req.file.originalname.replace(/\s/g, "");
+        let filename;
+        if(req.file){
+            filename=req.file.originalname.replace(/\s/g, "");
+        }
+        else{
+            filename="nopic.jpg";
+        }
         const user = await userModel.create({
             userUserName:req.body.userUserName,
             userName:req.body.userName,

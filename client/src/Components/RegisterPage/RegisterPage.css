@@ -1,0 +1,28 @@
+.register_page_container{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.register_page_container>div{
+    display: flex;
+    align-items: center;
+}
+.register_page_container>div>*{
+    margin: 5px;
+}
+.register_page_container>div>input{
+    border: 1px solid black;
+    padding: 5px;
+}
+.register_page_container>div>input:focus{
+    outline: none;
+}
+.register_submit{
+    background-color: rgb(0, 145, 255);
+    color: white;
+    padding: 5px;
+    border-radius: 10px;
+    
+}

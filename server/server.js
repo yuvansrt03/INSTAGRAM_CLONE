@@ -36,17 +36,15 @@ mongoose
   });
 
 const multerStorage = multer.diskStorage({
-    destination:(req, file, cb)=>{
-        cb(null,"public/assets")
-    },
-    filename:(req, file, cb)=>{
-        const filename=file.originalname.replace(/\s/g, "");
-        cb(null,filename);
-    }
+  destination:(req, file, cb)=>{
+    cb(null,"public/assets")
+  },
+  filename:(req, file, cb)=>{
+    const filename=file.originalname.replace(/\s/g, "");
+    cb(null,filename);
+  }
 })
-
 const upload=multer({storage:multerStorage});
-
 app.post('/auth/register',upload.single('Image'), createUser);
 app.put('/users/:id',upload.single('Image'),updateUser);
 app.post('/posts',upload.single('Image'),createPost);

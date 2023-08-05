@@ -1,0 +1,28 @@
+.login_page_container{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.login_page_container>div{
+    display: flex;
+    align-items: center;
+}
+.login_page_container>div>*{
+    margin: 5px;
+}
+.login_page_container>div>input{
+    border: 1px solid black;
+    padding: 5px;
+}
+.login_page_container>div>input:focus{
+    outline: none;
+}
+.login_submit{
+    background-color: rgb(0, 145, 255);
+    color: white;
+    padding: 5px;
+    border-radius: 10px;
+    
+}
