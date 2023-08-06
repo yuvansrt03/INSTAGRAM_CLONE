@@ -6,7 +6,6 @@ import { setPost } from '../../Slices/postSlice';
 function Feeds({feed}) {
   const dispatch=useDispatch();
   const user=useSelector(store=>store.auth.user);
-  console.log('asdfa')
   const [liked,setliked]=useState(feed.postLikes[user._id]);
   const handleLike=async()=>{
     try{
@@ -22,15 +21,15 @@ function Feeds({feed}) {
     }
   }
   return (
-    <div className="main_panel_feed shadow-lg border rounded-sm ">
+    <div className="border rounded-sm shadow-lg main_panel_feed ">
       <div className="main_panel_feed_header"> 
         <img className="main_panel_feed_profile_img"src={`http://localhost:5000/assets/${feed.postAuthorProfilePic}`} alt="" />
-        <div>{feed.postAuthorName}</div>
+        <div className='ml-1 font-semibold feed_authorName'>{feed.postAuthorName}</div>
       </div>
       
       <img className='main_panel_feed_file' src={`http://localhost:5000/assets/${feed.postPost}`} alt="" />
       <div className='main_panel_feed_description'>
-        <div className='font-bold mx-2'>{feed.postAuthorName}</div>
+        <div className='mx-2 font-bold'>{feed.postAuthorName}</div>
         {feed.postDescription}
       </div>
       <div className="main_panel_feed_footer">

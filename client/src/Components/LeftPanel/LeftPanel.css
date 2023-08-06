@@ -7,7 +7,7 @@
     position: fixed;
     background-color: white;
     border-right: solid rgb(250, 250, 250) 1px;
-
+    height: 100vh;
 }
 .left_panel_logo{
     height: 40px;
@@ -33,6 +33,7 @@
     object-fit: cover;
     border-radius: 100%;
     margin-top: 25px;
+    object-position: top top;
 }
 .left_panel_profile_name{
     font-size: 12px;

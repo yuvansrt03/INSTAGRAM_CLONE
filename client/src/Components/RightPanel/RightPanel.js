@@ -1,18 +1,42 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './RightPanel.css'
 import UserProfile from '../UserProfile/UserProfile'
-function RightPanel() {
+import { useSelector } from 'react-redux';
+function RightPanel(){
+  const user=useSelector(store=>store.auth.user)
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch('http://localhost:5000/users');
+        const jsonData = await response.json();
+        const friendJson=jsonData.filter(item=>item._id!==user._id);
+        setData(friendJson);
+        setLoading(false); 
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setLoading(false);
+      }
+    }
+    fetchData();
+  }, []); 
   return (
     <div className="right_panel_container">
       <div className="right_panel_user_profile">
-        <UserProfile></UserProfile>
+        <UserProfile friend={user} isadmin={true}></UserProfile>
       </div>
       <div><p className='mt-5 font-bold'>Suggested for You</p></div>
-      <div className="right_panel_friends">
-        <UserProfile></UserProfile>
-        <UserProfile></UserProfile>
-        <UserProfile></UserProfile>
-        <UserProfile></UserProfile>
+      <div className="right_panel_suggested">
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <>
+          {data.map(item =>
+            <UserProfile key={item._id} friend={item} isadmin={false}/>
+          )}
+        </>
+      )}
       </div>
     </div>
   )

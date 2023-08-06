@@ -15,7 +15,7 @@
     width: 40px;
     object-fit: cover;
     border-radius: 100%;
-    margin: 0px 20px;
+    margin: 0px 5px 0px 10px;
 }
 .main_panel_feed_file{
     object-position: center;
@@ -28,21 +28,16 @@
     align-items: center;
     background-color: white;
 }
-.like_animation{
-    animation: fillAnimation 2s forwards;
-}
-@keyframes fillAnimation {
-    0% {
-        fill:white
-    }
-    100% {
-      fill: red;
-    }
-  }
 .main_panel_feed_description{
+    font-size: 14px;
     display: flex;
+    background-color: white;
+    padding-top: 5px;
 }
 .main_panel_feed_footer>button> svg, .main_panel_feed_footer>div>button>svg{
     height: 23px;
     margin: 9px 7px;
+}
+.feed_authorName{
+    font-size: 14px;
 }

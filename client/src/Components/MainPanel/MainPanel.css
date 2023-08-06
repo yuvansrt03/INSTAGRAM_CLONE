@@ -32,7 +32,6 @@
     padding: 0px 4px;
 }
 
-
 .main_panel_main_section_background{
     display: flex;
     justify-content: center;
@@ -57,3 +56,28 @@
 .main_panel_stories_section > img{
     margin: 0px 10px;
 }
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+  
+.loading-spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #333;
+    animation: spin 1s infinite linear;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+
+@keyframes spin {
+    0% {
+    transform: rotate(0deg);
+    }
+    100% {
+    transform: rotate(360deg);
+    }
+}  
+  

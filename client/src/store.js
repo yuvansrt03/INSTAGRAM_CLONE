@@ -1,7 +1,5 @@
-// src/app/store.js
-
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import storage from 'redux-persist/lib/storage'; // or import 'redux-persist/lib/storage/session' for sessionStorage
+import { configureStore } from '@reduxjs/toolkit';
+import storage from 'redux-persist/lib/storage';
 import rootReducer from './Slices/rootReducer';
 import {
   persistStore,
@@ -13,7 +11,6 @@ import {
   PURGE,
   REGISTER
 } from 'redux-persist';
-import { serializableIgnoreMiddleware } from '@reduxjs/toolkit/query';
 const persistConfig = {
   key: 'root',
   storage,

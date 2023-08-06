@@ -59,7 +59,7 @@ export const followId = async(req,res)=>{
         let userFollowing=user.userFollowing;
         let friendFollowers=friend.userFollowers;
 
-        if(userFollowing.includes(friendId) && userFollowing!=null){
+        if(userFollowing!=null && userFollowing.includes(friendId)){
             userFollowing=userFollowing.filter(item=>item!=friendId);
             friendFollowers=friendFollowers.filter(item=>item!=userId);
         }

@@ -20,13 +20,12 @@ function RegisterPage() {
         formdata.append('Image',image);
         // console.log(formdata.get('Image'))
         let response = await axios.post("http://localhost:5000/auth/register",formdata)
-        let data=await response.data();
     }
     return (
     <form className="register_page_container">
         <h2>registerPage</h2>
         <div className='register_page_username'>
-            <label>Name</label>
+            <label>UserName</label>
             <input type="text" onChange={(e)=>setUserName(e.target.value)}/>
         </div>
         <div className='register_page_Name'>
@@ -38,16 +37,16 @@ function RegisterPage() {
             <input type="text" onChange={(e)=>setPassword(e.target.value)}/>
         </div>
         <div className='register_page_email'>
-            <label>Name</label>
+            <label>Email</label>
             <input type="text" onChange={(e)=>setEmail(e.target.value)}/>
         </div>
         <div className="register_page_dob">
-            <label htmlFor="">Password</label>
+            <label htmlFor="">Date</label>
             <input type="date" onChange={(e)=>setDate(e.target.value)}/>
         </div>
         <div className="register_page_profile_img">
             <label htmlFor="">Image</label>
-            <input type="file" onChange={(e)=>{console.log(e.target.files[0]);setImage(e.target.files[0])}}/>
+            <input type="file" onChange={(e)=>setImage(e.target.files[0])}/>
         </div>
         <button className='register_submit' onClick={handleSubmit}>Submit</button>
     </form>

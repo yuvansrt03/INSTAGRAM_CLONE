@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const CreatePost = () => {
   const [description, setDescription] = useState('');
   const [photo, setPhoto] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
-
+  const user=useSelector(store=>store.auth.user);
+  const navigate=useNavigate();
   const handleDescriptionChange = (e) => {
     setDescription(e.target.value);
   };
@@ -20,16 +23,28 @@ const CreatePost = () => {
       setPreviewUrl(null);
     }
   };
-
-  const handleSubmit = (e) => {
+  let formdata=new FormData();
+  formdata.append('postAuthorId',user._id);
+  formdata.append('postDescription',description);
+  formdata.append('Image',photo);
+  formdata.append('postAuthorName',user.userUserName);
+  formdata.append('postAuthorProfilePic',user.userProfileImg);
+  const handleSubmit = async(e) => {
     e.preventDefault();
-
+    const response=await fetch('http://localhost:5000/posts',{
+      method:'POST',
+      body:formdata,
+    })
+    const data=await response.json();
+    if(data._id){
+      // navigate('/')
+    }
   };
 
   return (
-    <div className="h-screen flex justify-center items-center"> 
-        <div className="flex flex-col max-w-sm m-auto p-4 bg-white shadow-md rounded-lg">
-        <h2 className="text-xl font-bold mb-4">Create Post</h2>
+    <div className="flex items-center justify-center h-screen"> 
+        <div className="flex flex-col max-w-sm p-4 m-auto bg-white rounded-lg shadow-md">
+        <h2 className="mb-4 text-xl font-bold">Create Post</h2>
         <form onSubmit={handleSubmit}>
             <div className="mb-4">
             <input
@@ -41,7 +56,7 @@ const CreatePost = () => {
                 />
             <label
                 htmlFor="photoInput"
-                className="block border border-gray-300 rounded-md p-2 cursor-pointer text-gray-500"
+                className="block p-2 text-gray-500 border border-gray-300 rounded-md cursor-pointer"
                 >
                 Select a JPG Photo
             </label>
@@ -49,12 +64,12 @@ const CreatePost = () => {
                 <img
                     src={previewUrl}
                     alt="Preview"
-                    className="mt-2 rounded-lg w-full"
+                    className="w-full mt-2 rounded-lg"
                 />
                 )}
             </div>
             <input
-                className="w-full p-2 border rounded-lg focus:outline-none focus:border-blue-500 mb-4 "
+                className="w-full p-2 mb-4 border rounded-lg focus:outline-none focus:border-blue-500 "
                 type='text'
                 placeholder="Write a description..."
                 value={description}
@@ -62,7 +77,7 @@ const CreatePost = () => {
             />
             <button
                 type="submit"
-                className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                className="px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600"
             >
             Post
             </button>

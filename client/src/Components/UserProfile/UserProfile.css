@@ -2,6 +2,7 @@
     width: 100%;
     display: flex;
     align-items: center;
+    margin:8px 0px
 }
 .userProfile_image{
     height: 35px;
@@ -9,3 +10,36 @@
     object-fit: cover;
     border-radius: 50%;
 }
+.follow-button {
+    color: #3897f0;
+    border: none;
+    font-size: 11px;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.userProfile_userName{
+    font-size: 12px;
+    font-weight: 900;
+}
+.userProfile_Name{
+    font-size: 10px;
+    font-weight: bold;
+    color: rgb(133, 133, 133)
+
+}
+
+.logout-button {
+    padding: 10px 20px;
+    border: none;
+    color: #FF4500;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    }
+
+  .logout-button:hover {
+    color: #FF5733; /* Slightly darker shade on hover */
+  }
