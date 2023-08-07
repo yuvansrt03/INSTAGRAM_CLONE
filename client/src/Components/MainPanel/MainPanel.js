@@ -13,10 +13,10 @@ function MainPanel() {
   const [isloading,setIsloading]=useState(true);
   const postData=useSelector(store=>store.post.posts)
   useEffect(() => {
+    window.scrollTo(0, 0);
     fetchData();
   }, []);
 
-  window.scrollTo(0, 0);
   const fetchData = async () => {
     try {
       const response = await fetch('http://localhost:5000/posts')

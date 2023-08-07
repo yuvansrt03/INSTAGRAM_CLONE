@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-
+// import {commentSchema} from './commentModel';
 const postSchema = new mongoose.Schema({
     postAuthorId:{
         type:String,
@@ -29,7 +29,24 @@ const postSchema = new mongoose.Schema({
     postTags:{
         type:Array,
         default:[]
-    }
+    },
+    postcomments:[
+        {
+            commentAuthorUserName:{
+                type:String,
+                required:true,
+            },
+            commentString:{
+                type:String,
+                required:true,
+            },
+            commentLike:{
+                type:Map,
+                Of:Boolean,
+                default:[]
+            }
+        }
+    ],
 },{
     timestamps:true
 })

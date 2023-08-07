@@ -12,7 +12,7 @@ import { createPost } from "./Controllers/postController.js";
 import { updateUser } from "./Controllers/userController.js";
 import { createUser } from "./Controllers/authController.js";
 import postRouter from "./Routers/postRouter.js";
-
+import commentRouter from "./Routers/commentRouter.js";
 dotenv.config()
 const PORT=process.env.PORT || 5001
 const app=express()
@@ -25,6 +25,8 @@ app.use(cors());
 app.use('/auth',authrouter);
 app.use('/users',userRouter);
 app.use('/posts',postRouter);
+// app.use('/comment',commentRouter);
+
 app.use('/assets',express.static(path.join(__dirname,"public/assets")));
 
 mongoose

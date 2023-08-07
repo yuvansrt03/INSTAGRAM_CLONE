@@ -1,5 +1,5 @@
 import postModel from '../Models/postModel.js'
-
+import mongoose from 'mongoose';
 export const deletePost = async(req,res)=>{
     try {
         const postId=req.params.postId

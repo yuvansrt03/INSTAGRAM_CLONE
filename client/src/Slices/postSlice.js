@@ -17,7 +17,6 @@ const postsSlice = createSlice({
       state.posts.push(action.payload);
     },
     setPost: (state,action)=>{
-      console.log(action.payload)
       state.posts=state.posts.map((item)=>{
         if(item._id===action.payload._id)return action.payload;
         return item;

@@ -1,9 +1,7 @@
-import express from 'express'
-const commentRouter = express.Router();
+import express from 'express';
+import { addComment } from '../Controllers/commentController.js';
+const commentRouter=express.Router();
 
-commentRouter.get('/');
-commentRouter.get('/:postId')
-commentRouter.get('/:postId/:commentId')
-commentRouter.delete('/:postId/:commentId');
+commentRouter.put('/:postId',addComment);
 
 export default commentRouter;
