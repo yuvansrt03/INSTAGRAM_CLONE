@@ -5,6 +5,8 @@ import LoginPage from './Components/LoginPage/LoginPage'
 import RegisterPage from './Components/RegisterPage/RegisterPage'
 import { useSelector } from 'react-redux'
 import CreatePost from './Components/CreatePost/CreatePost'
+import CommentPage from './Components/CommentPage/CommentPage'
+import ProfilePage from './Components/ProfilePage/ProfilePage'
 function App() {
   const authState=useSelector(store=>store.auth);
   return (
@@ -13,6 +15,8 @@ function App() {
         <Route path="/" element={authState.isAuthenticated? <HomePage/>:<LoginPage/>}/>
         <Route path="register" element={<RegisterPage/>}/>
         <Route path='createPost' element={<CreatePost/>}/>
+        <Route exact path="/comment/:postId" element={<CommentPage/>} />
+        <Route path="/profilePage" element={<ProfilePage/>}></Route>
       </Routes>
     </div>
   )

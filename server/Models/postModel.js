@@ -44,6 +44,9 @@ const postSchema = new mongoose.Schema({
                 type:Map,
                 Of:Boolean,
                 default:[]
+            },
+            commentAuthorProfilePic:{
+                type:String,
             }
         }
     ],

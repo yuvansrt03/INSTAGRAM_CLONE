@@ -13,7 +13,6 @@ function MainPanel() {
   const [isloading,setIsloading]=useState(true);
   const postData=useSelector(store=>store.post.posts)
   useEffect(() => {
-    window.scrollTo(0, 0);
     fetchData();
   }, []);
 

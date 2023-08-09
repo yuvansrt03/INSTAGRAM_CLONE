@@ -16,7 +16,7 @@ function LeftPanel() {
             
             <img className="left_panel_profile_image" src={`http://localhost:5000/assets/${user.userProfileImg}`}></img>
             <div className="left_panel_profile_name">{user.userUserName}</div>
-            <div className="left_panel_profile_address">{user.userName}</div>
+            <div className="left_panel_profile_address">@{user.userName}</div>
 
             <ul className='left_panel_profile_counts'>
               <li className='left_panel_profile_count'>

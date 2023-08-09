@@ -7,9 +7,19 @@ function Feeds({feed}) {
   const dispatch=useDispatch();
   const user=useSelector(store=>store.auth.user);
   const [liked,setliked]=useState(feed.postLikes[user._id]);
+  const [noOfLikes,setNoOfLikes]=useState(Object.keys(feed.postLikes).length);
+  const [commentText, setCommentText] = useState('');
+  const [noOfComments,setNoOfComments]=useState(Object.keys(feed.postcomments).length);
+  
+  const handleClickComment=()=>{
+    window.location.href=`/comment/${feed._id}`;
+  }
+
   const handleLike=async()=>{
     try{
       setliked(like=>!like);
+      if(liked)setNoOfLikes(count=>count-=1);
+      else setNoOfLikes(count=>count+=1);
       const response=await fetch(`http://localhost:5000/posts/${feed._id}/${user._id}`,{
         method:'PUT'
       });
@@ -20,8 +30,7 @@ function Feeds({feed}) {
       console.log({error:error})
     }
   }
-
-  const [commentText, setCommentText] = useState('');
+  
   const handleComment = async(event) => {
     event.preventDefault();
     const response = await fetch(`http://localhost:5000/posts/comment/${feed._id}`,{
@@ -35,10 +44,10 @@ function Feeds({feed}) {
       })
     })
     const data=await response.json();
-    console.log("dataafter",data);
     dispatch(setPost(data));
     setCommentText('');
   };
+  
   return (
     <div className="border rounded-sm shadow-lg main_panel_feed ">
       <div className="main_panel_feed_header"> 
@@ -54,12 +63,14 @@ function Feeds({feed}) {
       <div className="main_panel_feed_footer">
         <div className='flex flex-row flex-1 align-center'>
           <button onClick={handleLike}>{liked?<LikeSVG/>:<UnlikeSVG/>}</button>
-          <button><CommentSVG/></button>
+          <button onClick={handleClickComment}><CommentSVG/></button>
           <button><ShareSVG/></button>
         </div>
         <button><SaveSVG/></button>
       </div>
-      <div className="p-3 border-t bg-white border-gray-300">
+      {noOfLikes>0?<div className='font-semibold text-sm bg-white ml-2 pb-1'>{noOfLikes} Likes</div>:<></>}
+      {noOfComments>0?<div className='w-full bg-white'><button className='font-semibold text-gray-500 text-sm bg-white ml-2' onClick={handleClickComment}> View all {noOfComments} comments</button></div>:<></>}
+      <div className="p-1 bg-white border-gray-300 text-sm">
         <form onSubmit={handleComment}>
           <div className="flex items-center">
             <input
@@ -67,11 +78,11 @@ function Feeds({feed}) {
               value={commentText}
               onChange={(e)=>setCommentText(e.target.value)}
               placeholder="Add a comment..."
-              className="flex-grow px-3 py-2 mr-2 bg-gray-100 border border-gray-300 rounded-3xl focus:outline-none"
+              className="flex-grow ml-2 focus:outline-none"
             />
             <button
               type="submit"
-              className="px-4 py-2 font-semibold text-white bg-blue-500 rounded-xl hover:bg-blue-600 focus:outline-none"
+              className="px-2 py-1 font-semibold text-blue-500 rounded-xl hover:text-blue-600 focus:outline-none"
             >
               Post
             </button>
