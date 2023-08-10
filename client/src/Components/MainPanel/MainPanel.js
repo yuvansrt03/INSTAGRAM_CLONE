@@ -30,7 +30,7 @@ function MainPanel() {
     }
   };
   return (
-    <div className="flex-1 main_panel">
+    <div className="flex-auto">
 
       <div className='main_panel_search_section'>
         <div className='rounded-full main_panel_search_bar'>
