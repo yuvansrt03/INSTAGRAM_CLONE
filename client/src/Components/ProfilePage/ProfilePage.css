@@ -14,7 +14,7 @@
   display: flex;
   flex-direction: column;
   width: 300px;
-  padding:20px 0px;
+  margin:20px 0px;
   margin-left: 50px;
 }
 .profile_follow_button{

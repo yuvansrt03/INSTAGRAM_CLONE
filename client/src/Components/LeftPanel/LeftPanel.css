@@ -79,6 +79,9 @@
     background-color: rgb(254,67,110);
     border-radius: 0px 10px 10px 0px;
 }
+.left_panel_screen_type .isunactivebar{
+    display: none;
+}
 .left_panel_screen_type .isactivecolor{
     color: rgb(254,67,110);
 }

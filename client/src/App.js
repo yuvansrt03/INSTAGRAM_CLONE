@@ -8,6 +8,8 @@ import CreatePost from './Components/CreatePost/CreatePost'
 import CommentPage from './Components/CommentPage/CommentPage'
 import ProfilePage from './Components/ProfilePage/ProfilePage'
 import ExplorePanel from './Components/ExplorePanel/ExplorePanel'
+import IndividualPost from './Components/IndividualPost/IndividualPost'
+
 function App() {
   const authState=useSelector(store=>store.auth);
   return (
@@ -17,8 +19,9 @@ function App() {
         <Route path="register" element={<RegisterPage/>}/>
         <Route path='createPost' element={<CreatePost/>}/>
         <Route exact path="/comment/:postId" element={<CommentPage/>} />
-        <Route path="/profilePage/:userId" element={<ProfilePage/>}></Route>
+        <Route path="/users/:userId" element={<ProfilePage/>}></Route>
         <Route path='/explore' element={<ExplorePanel/>}/>
+        <Route path='/posts/:postId' element={<IndividualPost/>}></Route>
       </Routes>
     </div>
   )

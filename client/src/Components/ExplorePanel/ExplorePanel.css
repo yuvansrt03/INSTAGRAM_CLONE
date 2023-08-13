@@ -1,3 +1,14 @@
-.explore_panel{
+
+.explore_container>img{
+    height: 170px;
+    width: 170px;
+    object-fit: cover;
+    margin: 20px;
+}
+.explore_container{
     width: calc(100vw - 250px);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-left: 250px;
 }

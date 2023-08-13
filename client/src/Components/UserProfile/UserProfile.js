@@ -4,7 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMinus, faPlus, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from 'react-redux'
 import {setLogout,setUser} from '../../Slices/authSlice'
+import { useNavigate } from 'react-router-dom'
 function UserProfile({friend,isadmin}) {
+  const navigate=useNavigate()
   const dispatch=useDispatch()
   const user=useSelector(store=>store.auth.user);
   const [isFollowing,setIsFollowing]=useState(user.userFollowing.includes(friend._id));
@@ -24,11 +26,14 @@ function UserProfile({friend,isadmin}) {
       console.log({error:error.message})
     }
   }
+  const handleViewUser=()=>{
+    navigate(`/users/${friend._id}`);
+  }
   return (
     <div className="userProfile_container">
-        <img className="userProfile_image" src={`http://localhost:5000/assets/${friend.userProfileImg}`} alt="" />
-        <div className='flex flex-col justify-center flex-1'>
-          <div className='ml-4 userProfile_userName'>{friend.userUserName}</div>
+        <img className="userProfile_image" src={`http://localhost:5000/assets/${friend.userProfileImg}`} onClick={handleViewUser} alt="" />
+        <div className='flex flex-col justify-center flex-1 cursor-pointer' onClick={handleViewUser}>
+          <div className='ml-4 userProfile_userName' >{friend.userUserName}</div>
           <div className='ml-4 userProfile_Name '>{friend.userName}</div>
         </div>
         {!isadmin?

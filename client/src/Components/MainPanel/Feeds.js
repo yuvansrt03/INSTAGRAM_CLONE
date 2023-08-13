@@ -3,7 +3,9 @@ import './Feeds.css'
 import {useSelector,useDispatch} from 'react-redux'
 import { UnlikeSVG,ShareSVG,CommentSVG,SaveSVG, LikeSVG } from './svgs';
 import { setPost } from '../../Slices/postSlice';
+import { useNavigate } from 'react-router-dom';
 function Feeds({feed}) {
+  const navigate=useNavigate()
   const dispatch=useDispatch();
   const user=useSelector(store=>store.auth.user);
   const [liked,setliked]=useState(feed.postLikes[user._id]);
@@ -12,9 +14,12 @@ function Feeds({feed}) {
   const [noOfComments,setNoOfComments]=useState(Object.keys(feed.postcomments).length);
   
   const handleClickComment=()=>{
-    window.location.href=`/comment/${feed._id}`;
+    navigate(`/comment/${feed._id}`);
   }
 
+  const handleViewUser=()=>{
+    navigate(`/users/${feed.postAuthorId}`);
+  }
   const handleLike=async()=>{
     try{
       setliked(like=>!like);
@@ -51,8 +56,8 @@ function Feeds({feed}) {
   return (
     <div className="border rounded-sm shadow-lg main_panel_feed ">
       <div className="main_panel_feed_header"> 
-        <img className="main_panel_feed_profile_img"src={`http://localhost:5000/assets/${feed.postAuthorProfilePic}`} alt="" />
-        <div className='ml-1 font-semibold feed_authorName'>{feed.postAuthorName}</div>
+        <img className="main_panel_feed_profile_img cursor-pointer" onClick={handleViewUser} src={`http://localhost:5000/assets/${feed.postAuthorProfilePic}`} alt="" />
+        <div className='ml-1 font-semibold feed_authorName cursor-pointer' onClick={handleViewUser} >{feed.postAuthorName}</div>
       </div>
       
       <img className='main_panel_feed_file' src={`http://localhost:5000/assets/${feed.postPost}`} alt="" />

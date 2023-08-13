@@ -4,9 +4,10 @@ import RightPanel from './RightPanel/RightPanel'
 import MainPanel from './MainPanel/MainPanel'
 import './HomePage.css'
 function HomePage() {
+
   return (
     <div className='flex flex-row justify-between w-full h-max'>
-        <LeftPanel/>
+        <LeftPanel currentpath={''}/>
         <MainPanel/>
         <RightPanel/>
     </div>

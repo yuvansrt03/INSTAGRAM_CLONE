@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import './ProfilePage.css'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMinus, faPlus, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { setUser } from '../../Slices/authSlice';
 import LeftPanel from '../LeftPanel/LeftPanel'
-
+import ProfilePosts from './ProfilePosts';
 function ProfilePage() {
+    const navigate=useNavigate()
     const user=useSelector(store=>store.auth.user);
     const dispatch=useDispatch();
     const {userId}=useParams();
+    const [isadmin,setIsadmin]=useState(user._id===userId);
     const [userData,setUserData]=useState([]);
     const [userPosts,setUserPosts]=useState({});
     const [isFollowing,setIsFollowing]=useState(user.userFollowing.includes(userId));
@@ -33,7 +35,6 @@ function ProfilePage() {
         const data=await response.json();
         const userPost=data.filter(item=>item.postAuthorId===userId)
         setUserPosts(userPost);
-        console.log(userPost);
         setIspostsLoading(false);
     }
     const handleFollowId=async()=>{
@@ -50,29 +51,30 @@ function ProfilePage() {
           console.log({error:error.message})
         }
       }
-    const handleViewPost=async()=>{
 
-    }
     return (
         <>
             {isLoading?<>
             loading
             </>:
             <div className='flex'>
-        <div className='w-[250px]'><LeftPanel/></div>
-        <div className="profile-container ml-20 ">
+        <div className='w-[250px]'><LeftPanel currentpath={'explore'}/></div>
+        <div className="profile-container ml-20">
             <div className='flex flex-col items-center'>
                 <div className='flex justify-center'>
                     <div className='profile_header'>
                         <img src={`http://localhost:5000/assets/${userData.userProfileImg}`} className="profile_display_picture" alt="Profile" />
                         <div className="profile_details">
-                            <h2 className='font-semibold text-lg flex-1'>{userData.userUserName}</h2>
-                            <h2 className='font-semibold text-sm flex-1'>{userData.userUserName}</h2>
+                            <>
+                            <h2 className='font-semibold text-lg'>{userData.userUserName}</h2>
+                            <h2 className='font-semibold text-sm text-gray-500 flex-1'>{userData.userUserName}</h2>
+                            </>
                             <div className='flex justify-between'>
                                 <p className='text-sm font-bold py-1 mr-2'><span className='font-extraboldbold text-lg'>{followuser}</span> Followers</p>
                                 <p className='text-sm font-bold py-1 mr-2'><span className='font-extraboldbold text-lg'>{userData.userFollowing.length}</span> Following</p>
                                 <p className='text-sm font-bold py-1 mr-2'><span className='font-extraboldbold text-lg'>{Object.keys(userPosts).length}</span> Posts</p>
                             </div>
+                            {!isadmin?
                             <button className="profile_follow_button rounded text-sm p-1" onClick={handleFollowId}>
                                 {isFollowing ? 
                                     <>
@@ -85,6 +87,9 @@ function ProfilePage() {
                                     </>
                                 }
                             </button>
+                                :
+                            <button className="profile_follow_button rounded text-sm p-1 hidden" onClick={handleFollowId}>
+                            </button>}
                         </div>
                     </div>
                 </div>
@@ -92,7 +97,7 @@ function ProfilePage() {
                     <span className='font-semibold '>POSTS</span>
                     {ispostsLoading?<>Loading</>:
                         <div className='posts_container mt-5'>
-                            {userPosts.map(item=><img src={`http://localhost:5000/assets/${item.postPost}`} alt="postPost" className='' onClick={handleViewPost}></img>)}
+                            {userPosts.map(item=><ProfilePosts item={item}></ProfilePosts>)}
                         </div>
                     }
                 </div>
