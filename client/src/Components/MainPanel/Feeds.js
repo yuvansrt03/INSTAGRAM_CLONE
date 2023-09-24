@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import './Feeds.css'
 import {useSelector,useDispatch} from 'react-redux'
 import { UnlikeSVG,ShareSVG,CommentSVG,SaveSVG, LikeSVG } from './svgs';
-import { setPost } from '../../Slices/postSlice';
+import { setPost,setPosts } from '../../Slices/postSlice';
 import { useNavigate } from 'react-router-dom';
-function Feeds({feed}) {
+function Feeds({feed,updatefeed}) {
   const navigate=useNavigate()
   const dispatch=useDispatch();
   const user=useSelector(store=>store.auth.user);
@@ -35,7 +35,25 @@ function Feeds({feed}) {
       console.log({error:error})
     }
   }
-  
+  const handleDeletePost = async()=>{
+    try{
+      const response = await fetch(`http://localhost:5000/posts/${feed._id}`,{
+        method:'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      const data=await response.json();
+      const sortedData = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      dispatch(setPosts(sortedData));
+      updatefeed(sortedData);
+    }
+    catch(error){
+      console.log({error:error.message});
+    }
+
+
+  }
   const handleComment = async(event) => {
     event.preventDefault();
     const response = await fetch(`http://localhost:5000/posts/comment/${feed._id}`,{
@@ -57,7 +75,8 @@ function Feeds({feed}) {
     <div className="border rounded-sm shadow-lg main_panel_feed ">
       <div className="main_panel_feed_header"> 
         <img className="main_panel_feed_profile_img cursor-pointer" onClick={handleViewUser} src={`http://localhost:5000/assets/${feed.postAuthorProfilePic}`} alt="" />
-        <div className='ml-1 font-semibold feed_authorName cursor-pointer' onClick={handleViewUser} >{feed.postAuthorName}</div>
+        <div className='ml-1 font-semibold feed_authorName cursor-pointer flex-1' onClick={handleViewUser} >{feed.postAuthorName}</div>
+        {feed.postAuthorId===user._id?<button className='mr-3 text-red-500' onClick={handleDeletePost}>Delete</button>:<></>}
       </div>
       
       <img className='main_panel_feed_file' src={`http://localhost:5000/assets/${feed.postPost}`} alt="" />

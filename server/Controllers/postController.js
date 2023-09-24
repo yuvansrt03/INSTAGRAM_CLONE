@@ -4,7 +4,8 @@ export const deletePost = async(req,res)=>{
     try {
         const postId=req.params.postId
         await postModel.findByIdAndDelete(postId);
-        res.status(200).json("deleted successfully");
+        const posts=await postModel.find()
+        res.status(200).json(posts);
     } catch (error) {
         res.status(400).json({error:error.message})
     }

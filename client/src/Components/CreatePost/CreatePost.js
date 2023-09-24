@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
+import { setPosts } from '../../Slices/postSlice';
 const CreatePost = () => {
   const [description, setDescription] = useState('');
   const [photo, setPhoto] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
   const user=useSelector(store=>store.auth.user);
+  const dispatch=useDispatch();
   const navigate=useNavigate();
   const handleDescriptionChange = (e) => {
     setDescription(e.target.value);
@@ -35,9 +36,13 @@ const CreatePost = () => {
       method:'POST',
       body:formdata,
     })
-    const data=await response.json();
+    const data=await response.json()
+    const alldatares=await fetch('http://localhost:5000/posts');
+    const alldata=await alldatares.json();
     if(data._id){
-      // navigate('/')
+      navigate('/');
+      const sortedData = alldata.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      dispatch(setPosts(sortedData));
     }
   };
 

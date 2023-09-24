@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import axios from 'axios';
 import './RegisterPage.css'
+import { useNavigate } from 'react-router-dom';
 function RegisterPage() {
+    const navigate=useNavigate();
     const [userName,setUserName]=useState("")
     const [name,setName]=useState("")
     const [password,setPassword]=useState("")
@@ -20,6 +22,9 @@ function RegisterPage() {
         formdata.append('Image',image);
         // console.log(formdata.get('Image'))
         let response = await axios.post("http://localhost:5000/auth/register",formdata)
+    }
+    const handleChangeLogin = () =>{
+        navigate('/')
     }
     return (
     <form className="register_page_container">
@@ -49,6 +54,7 @@ function RegisterPage() {
             <input type="file" onChange={(e)=>setImage(e.target.files[0])}/>
         </div>
         <button className='register_submit' onClick={handleSubmit}>Submit</button>
+        <div className='mt-3 text-[#0091ff] cursor-pointer' onClick={handleChangeLogin}>Login</div>
     </form>
   )
 }

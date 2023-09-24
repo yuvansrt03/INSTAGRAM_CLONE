@@ -11,7 +11,8 @@ function ExplorePanel() {
       try{
         const response = await fetch(`http://localhost:5000/posts`);
         const data=await response.json();
-        setPosts(data);
+        const sortedData = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        setPosts(sortedData);
         setIsLoading(false)
       }catch(error){
         console.log({error:error.message})
@@ -23,7 +24,10 @@ function ExplorePanel() {
   return (
     <div className='explore_panel flex flex-row'>
       {
-        isLoading?<>Loading</>:
+        isLoading?
+        <div className="mt-auto loading-container w-screen">
+          <div className="loading-spinner"></div>
+        </div>:
         <div className='w-[100vw]'>
           <LeftPanel currentpath={'explore'}/>
           <>

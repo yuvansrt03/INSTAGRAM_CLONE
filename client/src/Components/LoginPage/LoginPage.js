@@ -3,12 +3,14 @@ import { setLogin,setLogout} from '../../Slices/authSlice';
 import './LoginPage.css'
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 function LoginPage() {
     const dispatch=useDispatch();
     const state=useSelector(store=>store.auth);
     const [name,setName]=useState("");
     const [password,setPassword]=useState("");
     const [invalid,setInvalid]=useState(false)
+    const navigate=useNavigate();
     // const [date,setDate]=useState("");
     const handleSubmit=async(e)=>{
         console.log(name,password);
@@ -32,7 +34,11 @@ function LoginPage() {
         }
 
     }
+    const handleNewUser=()=>{
+        navigate('/register');
+    }
     return (
+        <>
         <form className="login_page_container">
             <h2>LoginPage</h2>
             <div className='login_page_username'>
@@ -43,12 +49,11 @@ function LoginPage() {
                 <label htmlFor="">Password</label>
                 <input type="text" onChange={(e)=>setPassword(e.target.value)}/>
             </div>
-            {/* <div className="login_page_dob">
-                <label htmlFor="">Password</label>
-                <input type="date" onChange={(e)=>setDate(e.target.value)}/>
-            </div> */}
             <button className='login_submit' onClick={handleSubmit}>Submit</button>
+            <div className='mt-3 text-[#0091ff] cursor-pointer' onClick={handleNewUser}>New User</div>
         </form>
+        </>
+
     )
 }
 

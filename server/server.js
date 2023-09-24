@@ -41,7 +41,7 @@ const multerStorage = multer.diskStorage({
   destination:(req, file, cb)=>{
     cb(null,"public/assets")
   },
-  filename:(req, file, cb)=>{
+  filename:(req, file, cb)=>{ 
     const filename=file.originalname.replace(/\s/g, "");
     cb(null,filename);
   }

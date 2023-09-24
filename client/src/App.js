@@ -13,7 +13,6 @@ import IndividualPost from './Components/IndividualPost/IndividualPost'
 function App() {
   const authState=useSelector(store=>store.auth);
   return (
-    <div>
       <Routes>
         <Route path="/" element={authState.isAuthenticated? <HomePage/>:<LoginPage/>}/>
         <Route path="register" element={<RegisterPage/>}/>
@@ -23,7 +22,6 @@ function App() {
         <Route path='/explore' element={<ExplorePanel/>}/>
         <Route path='/posts/:postId' element={<IndividualPost/>}></Route>
       </Routes>
-    </div>
   )
 }
 

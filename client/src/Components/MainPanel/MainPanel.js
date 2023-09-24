@@ -12,10 +12,14 @@ function MainPanel() {
   const navigate=useNavigate()
   const [isloading,setIsloading]=useState(true);
   const postData=useSelector(store=>store.post.posts)
+  const [feeds,setFeeds]=useState(postData);
   useEffect(() => {
     fetchData();
   }, []);
-
+  const updatefeed = (feed)=>{
+    console.log("hey");
+    setFeeds(feed);
+  }
   const fetchData = async () => {
     try {
       const response = await fetch('http://localhost:5000/posts')
@@ -37,7 +41,7 @@ function MainPanel() {
             <FontAwesomeIcon icon={faSearch} style={{color: "#acacac",}} />
             <input type="text" placeholder='Search'/>
         </div>
-        <button className="text-sm rounded-full main_panel_create_button" onClick={()=>{navigate('/createPost')}}>
+        <button className="text-sm rounded-full main_panel_create_button" onClick={()=>{navigate('/createPost',)}}>
           <FontAwesomeIcon icon={faPlus} style={{color: "#ffffff",}} />
           <span className='text'>Create New Post</span>
         </button>
@@ -53,7 +57,7 @@ function MainPanel() {
               <div className="loading-spinner"></div>
             </div>:
             <div className="main_panel_feeds_section">
-              {postData.map(feed=><Feeds key={feed._id} feed={feed}></Feeds>)}
+              {feeds.map(feed=><Feeds key={feed._id} feed={feed} updatefeed={updatefeed}></Feeds>)}
             </div>
           }
         </div>
