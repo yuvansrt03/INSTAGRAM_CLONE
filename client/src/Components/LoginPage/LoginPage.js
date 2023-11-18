@@ -26,7 +26,7 @@ function LoginPage() {
         const data=await response.json();
         if(data._id){
             dispatch(setLogin(data));
-            console.log(state)
+            // console.log(state)
             // window.location.href="/";
         }
         else{

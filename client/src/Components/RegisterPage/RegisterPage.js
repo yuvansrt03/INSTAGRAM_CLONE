@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import axios from 'axios';
 import './RegisterPage.css'
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { setLogin } from '../../Slices/authSlice';
 function RegisterPage() {
     const navigate=useNavigate();
+    const dispatch=useDispatch()
     const [userName,setUserName]=useState("")
     const [name,setName]=useState("")
     const [password,setPassword]=useState("")
@@ -22,6 +25,12 @@ function RegisterPage() {
         formdata.append('Image',image);
         // console.log(formdata.get('Image'))
         let response = await axios.post("http://localhost:5000/auth/register",formdata)
+        if(response.data.userUserName){
+            // console.log(response.data)
+            dispatch(setLogin(response.data));
+            navigate('/');
+
+        }
     }
     const handleChangeLogin = () =>{
         navigate('/')
