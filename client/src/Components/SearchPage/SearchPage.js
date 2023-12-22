@@ -18,7 +18,7 @@ function SearchPage() {
     fetchUsers();
   }, []);
   const fetchUsers = async () => {
-    const userdata = await fetch("http://localhost:5000/users");
+    const userdata = await fetch(`${process.env.REACT_APP_BACKEND_URL}/users`);
     const data = await userdata.json();
     const filteredData = data.filter((item) => item._id !== user._id);
     let count = 0;
