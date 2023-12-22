@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.4db43225.css",
+    "main.js": "/static/js/main.b917abf4.js",
+    "static/media/finding-a-new-app-in-mobile-phone-upscaled.png": "/static/media/finding-a-new-app-in-mobile-phone-upscaled.fa26660863e956530612.png",
+    "index.html": "/index.html",
+    "main.4db43225.css.map": "/static/css/main.4db43225.css.map",
+    "main.b917abf4.js.map": "/static/js/main.b917abf4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4db43225.css",
+    "static/js/main.b917abf4.js"
+  ]
+}

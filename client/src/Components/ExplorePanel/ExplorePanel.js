@@ -13,7 +13,9 @@ function ExplorePanel() {
   useEffect(() => {
     async function fetchPosts() {
       try {
-        const response = await fetch(`http://localhost:5000/posts`);
+        const response = await fetch(
+          `${process.env.REACT_APP_BACKEND_URL}/posts`
+        );
         const data = await response.json();
         const sortedData = data.sort(
           (a, b) => new Date(b.createdAt) - new Date(a.createdAt)

@@ -21,7 +21,9 @@ function ChatPage() {
 
   const fetchChatFriends = async () => {
     try {
-      const response = await fetch("http://localhost:5000/chats");
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/chats`
+      );
       const data = await response.json();
       const userChats = data.filter(
         (item) => item.senderId === user._id || item.receiverId === user._id
@@ -44,7 +46,9 @@ function ChatPage() {
       console.log("uniqueChatFriends", uniqueChatFriends);
 
       const promises = uniqueChatFriends.map(async (item) => {
-        const response = await fetch(`http://localhost:5000/users/${item}`);
+        const response = await fetch(
+          `${process.env.REACT_APP_BACKEND_URL}/users/${item}`
+        );
         const data = await response.json();
         if (data) dispatch(addChatFriends(data));
         return data;

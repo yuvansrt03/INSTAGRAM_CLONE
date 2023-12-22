@@ -8,7 +8,7 @@ function ProfilePosts({ item }) {
   };
   return (
     <img
-      src={`http://localhost:5000/assets/${item.postPost}`}
+      src={`${process.env.REACT_APP_BACKEND_URL}/assets/${item.postPost}`}
       alt="postPost"
       onClick={handleViewPost}
       className="transition-all ease-in-out rounded-md cursor-pointer duration-350 hover:scale-110 "

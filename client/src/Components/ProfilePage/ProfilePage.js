@@ -29,14 +29,16 @@ function ProfilePage() {
     fetchPosts();
   }, []);
   const fetchData = async () => {
-    const response = await fetch(`http://localhost:5000/users/${userId}`);
+    const response = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/users/${userId}`
+    );
     const data = await response.json();
     setUserData(data);
     setIsLoading(false);
     setFollowUser(data.userFollowers.length);
   };
   const fetchPosts = async () => {
-    const response = await fetch("http://localhost:5000/posts");
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/posts`);
     const data = await response.json();
     const userPost = data.filter((item) => item.postAuthorId === userId);
     setUserPosts(userPost);
@@ -49,7 +51,7 @@ function ProfilePage() {
         ? setFollowUser((value) => (value = value - 1))
         : setFollowUser((value) => (value = value + 1));
       const response = await fetch(
-        `http://localhost:5000/users/follow/${user._id}/${userId}`,
+        `${process.env.REACT_APP_BACKEND_URL}/users/follow/${user._id}/${userId}`,
         {
           method: "PUT",
           header: { "Content-Type": "application/json" },
@@ -88,7 +90,7 @@ function ProfilePage() {
                 <div className="flex justify-center">
                   <div className="profile_header">
                     <img
-                      src={`http://localhost:5000/assets/${userData.userProfileImg}`}
+                      src={`${process.env.REACT_APP_BACKEND_URL}/assets/${userData.userProfileImg}`}
                       className="w-[100px] h-[100px] lg:w-[150px] lg:h-[150px] object-cover rounded-full"
                       alt="Profile"
                     />

@@ -14,7 +14,7 @@ function Chats({ friend, inside }) {
             ? "h-[65px] w-[65px] md:h-[70px] md:w-[70px] lg:h-[50px] lg:w-[50px] rounded-full object-cover"
             : "h-[45px] w-[45px] rounded-full object-cover"
         }
-        src={`http://localhost:5000/assets/${friend.userProfileImg}`}
+        src={`${process.env.REACT_APP_BACKEND_URL}/assets/${friend.userProfileImg}`}
         alt=""
       />
       <div className="flex flex-col p-2 ml-2">

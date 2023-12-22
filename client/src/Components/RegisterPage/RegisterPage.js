@@ -26,7 +26,7 @@ function RegisterPage() {
     formdata.append("Image", image);
     // console.log(formdata.get('Image'))
     let response = await axios.post(
-      "http://localhost:5000/auth/register",
+      `${process.env.REACT_APP_BACKEND_URL}/auth/register`,
       formdata
     );
     if (response.data.userUserName) {

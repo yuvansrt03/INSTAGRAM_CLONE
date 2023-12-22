@@ -54,7 +54,7 @@ function IndividualChat() {
       displayMessage(userId, friendId, chatMessage);
       socket.emit("send-message", chatMessage);
       setChatMessage("");
-      const data = await fetch(`http://localhost:5000/chats`, {
+      const data = await fetch(`${process.env.REACT_APP_BACKEND_URL}/chats`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -71,10 +71,10 @@ function IndividualChat() {
   const fetchChat = async () => {
     try {
       const chatResponse = await fetch(
-        `http://localhost:5000/chats/${userId}/${friendId}`
+        `${process.env.REACT_APP_BACKEND_URL}/chats/${userId}/${friendId}`
       );
       const friendResponse = await fetch(
-        `http://localhost:5000/users/${friendId}`
+        `${process.env.REACT_APP_BACKEND_URL}/users/${friendId}`
       );
       const friendData = await friendResponse.json();
       const chatData = await chatResponse.json();
@@ -100,7 +100,7 @@ function IndividualChat() {
             >
               <img
                 className="h-[60px] w-[60px] md:h-[40px] md:w-[40px] object-cover rounded-full"
-                src={`http://localhost:5000/assets/${friend.userProfileImg}`}
+                src={`${process.env.REACT_APP_BACKEND_URL}/assets/${friend.userProfileImg}`}
                 alt=""
               />
               <div className="text-[18px] md:text-[16px] flex justify-start items-center ml-2 font-bold">

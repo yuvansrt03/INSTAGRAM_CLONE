@@ -9,7 +9,9 @@ function RightPanel() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch("http://localhost:5000/users");
+        const response = await fetch(
+          `${process.env.REACT_APP_BACKEND_URL}/users`
+        );
         const jsonData = await response.json();
         const friendJson = jsonData.filter((item) => item._id !== user._id);
         setData(friendJson);

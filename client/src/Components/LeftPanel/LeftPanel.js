@@ -48,7 +48,7 @@ function LeftPanel({ currentpath }) {
           >
             <img
               className="left_panel_profile_image"
-              src={`http://localhost:5000/assets/${user.userProfileImg}`}
+              src={`${process.env.REACT_APP_BACKEND_URL}/assets/${user.userProfileImg}`}
             ></img>
             <div className="left_panel_profile_name">{user.userUserName}</div>
             <div className="left_panel_profile_address">@{user.userName}</div>

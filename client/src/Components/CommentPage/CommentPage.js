@@ -20,7 +20,7 @@ const CommentPage = () => {
   useEffect(() => {
     const fetchComments = async () => {
       const commentsFetch = await fetch(
-        `http://localhost:5000/comments/${postId}`
+        `${process.env.REACT_APP_BACKEND_URL}/comments/${postId}`
       );
       const commentsResponse = await commentsFetch.json();
       console.log(commentsResponse);
@@ -41,13 +41,16 @@ const CommentPage = () => {
       commentAuthorProfilePic: user.userProfileImg,
     };
     console.log(newComment);
-    const response = await fetch(`http://localhost:5000/comments/${postId}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newComment),
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/comments/${postId}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newComment),
+      }
+    );
     const data = await response.json();
     setCommentsList((item) => [...item, data]);
     console.log(data);
@@ -102,7 +105,7 @@ const CommentPage = () => {
                     key={comment._id}
                   >
                     <img
-                      src={`http://localhost:5000/assets/${comment.commentAuthorProfilePic}`}
+                      src={`${process.env.REACT_APP_BACKEND_URL}/assets/${comment.commentAuthorProfilePic}`}
                       className="w-10 h-10 mr-2 rounded-full"
                       alt="authorProfilePic"
                     />

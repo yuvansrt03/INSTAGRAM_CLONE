@@ -16,14 +16,17 @@ function LoginPage() {
   const handleSubmit = async (e) => {
     console.log(name, password);
     e.preventDefault();
-    const response = await fetch("http://localhost:5000/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        userUserName: name,
-        userPassword: password,
-      }),
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/auth/login`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userUserName: name,
+          userPassword: password,
+        }),
+      }
+    );
     const data = await response.json();
     if (data._id) {
       dispatch(setLogin(data));

@@ -27,7 +27,7 @@ function Feeds({ feed, updatefeed }) {
       if (liked) setNoOfLikes((count) => (count -= 1));
       else setNoOfLikes((count) => (count += 1));
       const response = await fetch(
-        `http://localhost:5000/posts/${feed._id}/${user._id}`,
+        `${process.env.REACT_APP_BACKEND_URL}/posts/${feed._id}/${user._id}`,
         {
           method: "PUT",
         }
@@ -40,12 +40,15 @@ function Feeds({ feed, updatefeed }) {
   };
   const handleDeletePost = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/posts/${feed._id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/posts/${feed._id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       const data = await response.json();
       const sortedData = data.sort(
         (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
@@ -58,18 +61,21 @@ function Feeds({ feed, updatefeed }) {
   };
   const handleComment = async (event) => {
     event.preventDefault();
-    const response = await fetch(`http://localhost:5000/comments/${feed._id}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        commentPostId: feed._id,
-        commentAuthorUserName: user.userUserName,
-        commentString: commentText,
-        commentAuthorProfilePic: user.userProfileImg,
-      }),
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/comments/${feed._id}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          commentPostId: feed._id,
+          commentAuthorUserName: user.userUserName,
+          commentString: commentText,
+          commentAuthorProfilePic: user.userProfileImg,
+        }),
+      }
+    );
     const data = await response.json();
     dispatch(setPost(data));
     setCommentText("");
@@ -81,7 +87,7 @@ function Feeds({ feed, updatefeed }) {
         <img
           className="cursor-pointer main_panel_feed_profile_img"
           onClick={handleViewUser}
-          src={`http://localhost:5000/assets/${feed.postAuthorProfilePic}`}
+          src={`${process.env.REACT_APP_BACKEND_URL}/assets/${feed.postAuthorProfilePic}`}
           alt=""
         />
         <div
@@ -103,7 +109,7 @@ function Feeds({ feed, updatefeed }) {
       </div>
       <img
         className="main_panel_feed_file"
-        src={`http://localhost:5000/assets/${feed.postPost}`}
+        src={`${process.env.REACT_APP_BACKEND_URL}/assets/${feed.postPost}`}
         alt=""
       />
       <div className="main_panel_feed_description">

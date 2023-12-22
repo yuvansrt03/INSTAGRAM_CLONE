@@ -12,7 +12,9 @@ function IndividualPost() {
     async function fetchPost() {
       const fetchData = async () => {
         try {
-          const response = await fetch(`http://localhost:5000/posts/${postId}`);
+          const response = await fetch(
+            `${process.env.REACT_APP_BACKEND_URL}/posts/${postId}`
+          );
           const jsonData = await response.json();
           setFeed(jsonData);
           setIsLoading(false);

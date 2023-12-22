@@ -34,12 +34,14 @@ const CreatePost = () => {
   formdata.append("postAuthorProfilePic", user.userProfileImg);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:5000/posts", {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/posts`, {
       method: "POST",
       body: formdata,
     });
     const data = await response.json();
-    const alldatares = await fetch("http://localhost:5000/posts");
+    const alldatares = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/posts`
+    );
     const alldata = await alldatares.json();
     if (data._id) {
       navigate("/");

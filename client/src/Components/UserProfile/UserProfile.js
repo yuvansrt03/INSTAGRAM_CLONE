@@ -23,7 +23,7 @@ function UserProfile({ friend, isadmin, inSearch }) {
     try {
       setIsFollowing((value) => !value);
       const response = await fetch(
-        `http://localhost:5000/users/follow/${user._id}/${friend._id}`,
+        `${process.env.REACT_APP_BACKEND_URL}/users/follow/${user._id}/${friend._id}`,
         {
           method: "PUT",
           header: { "Content-Type": "application/json" },
@@ -42,7 +42,7 @@ function UserProfile({ friend, isadmin, inSearch }) {
     <div className="userProfile_container">
       <img
         className="userProfile_image"
-        src={`http://localhost:5000/assets/${friend.userProfileImg}`}
+        src={`${process.env.REACT_APP_BACKEND_URL}/assets/${friend.userProfileImg}`}
         onClick={handleViewUser}
         alt=""
       />

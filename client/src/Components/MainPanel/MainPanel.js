@@ -24,7 +24,9 @@ function MainPanel() {
   };
   const fetchData = async () => {
     try {
-      const response = await fetch("http://localhost:5000/posts");
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/posts`
+      );
       const jsonData = await response.json();
       const sortedData = jsonData.sort(
         (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
