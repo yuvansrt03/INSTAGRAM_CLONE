@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { setPosts } from '../../Slices/postSlice';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { setPosts } from "../../Slices/postSlice";
+import BottomNav from "../BottomNav/BottomNav";
+import LeftPanel from "../LeftPanel/LeftPanel";
 const CreatePost = () => {
-  const [description, setDescription] = useState('');
+  const [description, setDescription] = useState("");
   const [photo, setPhoto] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
-  const user=useSelector(store=>store.auth.user);
-  const dispatch=useDispatch();
-  const navigate=useNavigate();
+  const user = useSelector((store) => store.auth.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleDescriptionChange = (e) => {
     setDescription(e.target.value);
   };
@@ -16,7 +18,7 @@ const CreatePost = () => {
   const handlePhotoChange = (e) => {
     const selectedPhoto = e.target.files[0];
 
-    if (selectedPhoto && selectedPhoto.type === 'image/jpeg') {
+    if (selectedPhoto && selectedPhoto.type === "image/jpeg") {
       setPhoto(selectedPhoto);
       setPreviewUrl(URL.createObjectURL(selectedPhoto));
     } else {
@@ -24,71 +26,88 @@ const CreatePost = () => {
       setPreviewUrl(null);
     }
   };
-  let formdata=new FormData();
-  formdata.append('postAuthorId',user._id);
-  formdata.append('postDescription',description);
-  formdata.append('Image',photo);
-  formdata.append('postAuthorName',user.userUserName);
-  formdata.append('postAuthorProfilePic',user.userProfileImg);
-  const handleSubmit = async(e) => {
+  let formdata = new FormData();
+  formdata.append("postAuthorId", user._id);
+  formdata.append("postDescription", description);
+  formdata.append("Image", photo);
+  formdata.append("postAuthorName", user.userUserName);
+  formdata.append("postAuthorProfilePic", user.userProfileImg);
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const response=await fetch('http://localhost:5000/posts',{
-      method:'POST',
-      body:formdata,
-    })
-    const data=await response.json()
-    const alldatares=await fetch('http://localhost:5000/posts');
-    const alldata=await alldatares.json();
-    if(data._id){
-      navigate('/');
-      const sortedData = alldata.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    const response = await fetch("http://localhost:5000/posts", {
+      method: "POST",
+      body: formdata,
+    });
+    const data = await response.json();
+    const alldatares = await fetch("http://localhost:5000/posts");
+    const alldata = await alldatares.json();
+    if (data._id) {
+      navigate("/");
+      const sortedData = alldata.sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      );
       dispatch(setPosts(sortedData));
     }
   };
 
   return (
-    <div className="flex items-center justify-center h-screen"> 
-        <div className="flex flex-col max-w-sm p-4 m-auto bg-white rounded-lg shadow-md">
-        <h2 className="mb-4 text-xl font-bold">Create Post</h2>
-        <form onSubmit={handleSubmit}>
+    <>
+      <div>
+        <img
+          className="cursor-pointer left_panel_logo lg:hidden"
+          src="https://upload.wikimedia.org/wikipedia/commons/0/06/%C4%B0nstagram-Profilime-Kim-Bakt%C4%B1-1.png"
+          onClick={() => navigate("/")}
+        />
+      </div>
+      <LeftPanel currentpath={"createPost"} />
+      <div className="flex items-start justify-center w-screen h-screen">
+        <div className="flex mt-[30px] bg-white rounded-lg flex-col p-4">
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col w-[300px] md:w-[500px]"
+          >
             <div className="mb-4">
-            <input
+              <input
                 type="file"
                 accept="image/jpeg"
                 className="hidden"
                 id="photoInput"
                 onChange={handlePhotoChange}
-                />
-            <label
+              />
+              <label
                 htmlFor="photoInput"
                 className="block p-2 text-gray-500 border border-gray-300 rounded-md cursor-pointer"
-                >
+              >
                 Select a JPG Photo
-            </label>
-            {previewUrl && (
+              </label>
+              {previewUrl && (
                 <img
-                    src={previewUrl}
-                    alt="Preview"
-                    className="w-full mt-2 rounded-lg"
+                  src={previewUrl}
+                  alt="Preview"
+                  className="w-full mt-2 rounded-lg"
                 />
-                )}
+              )}
             </div>
             <input
-                className="w-full p-2 mb-4 border rounded-lg focus:outline-none focus:border-blue-500 "
-                type='text'
-                placeholder="Write a description..."
-                value={description}
-                onChange={handleDescriptionChange}
+              className="w-full p-2 mb-4 border rounded-lg focus:outline-none focus:border-blue-500 "
+              type="text"
+              placeholder="Write a description..."
+              value={description}
+              onChange={handleDescriptionChange}
             />
             <button
-                type="submit"
-                className="px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600"
+              type="submit"
+              className="px-4 py-2 text-white rounded-md bg-pink hover:bg-darkPink"
             >
-            Post
+              Post
             </button>
-        </form>
+          </form>
         </div>
-    </div>
+      </div>
+      <div className="block lg:hidden">
+        <BottomNav path="createPost" />
+      </div>
+    </>
   );
 };
 

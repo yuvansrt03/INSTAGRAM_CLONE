@@ -1,14 +1,29 @@
+.explore_container > img {
+  height: 170px;
+  width: 170px;
+  object-fit: cover;
+  margin: 20px;
+}
+.explore_container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
 
-.explore_container>img{
-    height: 170px;
-    width: 170px;
+@media (max-width: 1130px) {
+  .explore_container > img {
+    height: 120px;
+    width: 120px;
     object-fit: cover;
     margin: 20px;
+  }
 }
-.explore_container{
-    width: calc(100vw - 250px);
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    margin-left: 250px;
+
+@media (max-width: 768px) {
+  .explore_container > img {
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+    margin: 20px;
+  }
 }
